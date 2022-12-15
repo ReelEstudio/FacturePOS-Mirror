@@ -1,0 +1,197 @@
+{% extends 'form.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block head_form %}
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-4.2.5/css/jquery.bootstrap-touchspin.css' %}"/>
+    <script src="{% static 'lib/bootstrap-touchspin-4.2.5/js/jquery.bootstrap-touchspin.js' %}"></script>
+    <script src="{% static 'company/js/form.js' %}"></script>
+{% endblock %}
+
+{% block form_components %}
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.ruc.label }}:</label>
+                {{ form.ruc }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.business_name.label }}:</label>
+                {{ form.business_name }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.tradename.label }}:</label>
+                {{ form.tradename }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.main_address.label }}:</label>
+                {{ form.main_address }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.establishment_address.label }}:</label>
+                {{ form.establishment_address }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.establishment_code.label }}:</label>
+                {{ form.establishment_code }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.issuing_point_code.label }}:</label>
+                {{ form.issuing_point_code }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.special_taxpayer.label }}:</label>
+                {{ form.special_taxpayer }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.obligated_accounting.label }}:</label>
+                {{ form.obligated_accounting }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.environment_type.label }}:</label>
+                {{ form.environment_type }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.emission_type.label }}:</label>
+                {{ form.emission_type }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.iva.label }}:</label>
+                {{ form.iva }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.mobile.label }}:</label>
+                {{ form.mobile }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.phone.label }}:</label>
+                {{ form.phone }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.email.label }}:</label>
+                {{ form.email }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.website.label }}:</label>
+                {{ form.website }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.retention_agent.label }}:</label>
+                {{ form.retention_agent }}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>{{ form.description.label }}:</label>
+                {{ form.description }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.electronic_signature_key.label }}:</label>
+                {{ form.electronic_signature_key }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.email_host.label }}:</label>
+                {{ form.email_host }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.email_port.label }}:</label>
+                {{ form.email_port }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.email_host_user.label }}:</label>
+                {{ form.email_host_user }}
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>{{ form.email_host_password.label }}:</label>
+                {{ form.email_host_password }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>{{ form.image.label }}:</label>
+                {{ form.image }}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>{{ form.electronic_signature.label }}:</label>
+                {{ form.electronic_signature }}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalCertificate" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">
+                        <i class="fa-solid fa-file-circle-check"></i> Información de la firma electrónica
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid" id="content-certificate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
