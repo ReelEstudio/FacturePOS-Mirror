@@ -454,6 +454,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 message_error('Debe tener al menos un item en el detalle de la venta');
                 return false;
             }
+            var customer = select_client.select2('data')[0];
+            if (customer.identification_type.id === '07' && sale.details.total >= 50) {
+                message_error('No puede generar una factura con un monto de 50 dólares con un cliente consumidor final !!');
+                return false;
+            }
+            if (customer.identification_type.id === '07' && select_payment_method.val() === 'credito') {
+                message_error('No se puede generar una factura a crédito con un cliente consumidor final !!');
+                return false;
+            }
             parameters.append('products', JSON.stringify(sale.details.products));
             var list_url = fvSale.form.getAttribute('data-url');
             submit_formdata_with_ajax('Notificación',

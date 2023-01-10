@@ -57,14 +57,14 @@ class SaleCreateView(PermissionMixin, CreateView):
     success_url = reverse_lazy('sale_admin_list')
     permission_required = 'add_sale'
 
-    def get_form(self, form_class=None):
-        form = SaleForm()
-        client = Client.objects.filter(user__dni='9999999999999')
-        if client.exists():
-            client = client[0]
-            form.fields['client'].queryset = Client.objects.filter(id=client.id)
-            form.initial = {'client': client}
-        return form
+    # def get_form(self, form_class=None):
+    #     form = SaleForm()
+    #     client = Client.objects.filter(user__dni='9999999999999')
+    #     if client.exists():
+    #         client = client[0]
+    #         form.fields['client'].queryset = Client.objects.filter(id=client.id)
+    #         form.initial = {'client': client}
+    #     return form
 
     def post(self, request, *args, **kwargs):
         action = request.POST['action']
