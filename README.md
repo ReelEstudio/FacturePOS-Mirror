@@ -147,6 +147,14 @@ sudo /etc/init.d/cron restart
 
 ------------
 
+##### En algunos casos de sede instalar manualmente el servicio de la base de datos. (en el caso de usar Sqlite)
+
+```bash
+sudo apt-get install sqlite3
+```
+
+------------
+
 #  Gracias por adquirir mi producto ✅🙏
 #### Esto me sirve mucho para seguir produciendo mi contenido 🤗​
 ### ¡Apóyame! para seguir haciéndolo siempre 😊👏
