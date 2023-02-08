@@ -155,6 +155,16 @@ sudo apt-get install sqlite3
 
 ------------
 
+##### Para mantenerlo funcionando hay que instalar supervisor y agregar el programa para que siempre se ejecute
+
+https://www.youtube.com/watch?v=LhnEJOdjMN8
+https://www.youtube.com/watch?v=RSD6TGb3YNk&list=PLxm9hnvxnn-hFNSoNrWM0LalFnSv5oMas&index=19
+https://www.digitalocean.com/community/tutorials/how-to-install-and-manage-supervisor-on-ubuntu-and-debian-vps
+
+
+
+------------
+
 #  Gracias por adquirir mi producto ✅🙏
 #### Esto me sirve mucho para seguir produciendo mi contenido 🤗​
 ### ¡Apóyame! para seguir haciéndolo siempre 😊👏
