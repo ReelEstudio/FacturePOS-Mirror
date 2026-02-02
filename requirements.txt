@@ -1,0 +1,24 @@
+#Requirements for railway
+# Web Server
+gunicorn==21.2.0
+
+# Framework Base
+Django>=4.2,<5.0
+
+# Base de Datos (Conexión con Supabase)
+psycopg2-binary==2.9.9
+dj-database-url==2.1.0
+
+# Archivos Estáticos
+whitenoise==6.6.0
+
+# Generación de PDFs (WeasyPrint y dependencias)
+weasyprint==61.2
+cffi==1.16.0
+
+# Entorno y Utilidades
+python-dotenv==1.0.1
+requests==2.31.0
+
+# Firma Electrónica / Integraciones (Si usas librerías específicas de Java vía Python)
+# JPype1==1.5.0  <-- Descomenta esta línea si tu código usa JPype para llamar a Java
