@@ -1,4 +1,3 @@
-#Requirements for Railway
 # Servidor y Base de Datos
 gunicorn==21.2.0
 psycopg2-binary==2.9.9
@@ -16,10 +15,12 @@ django-widget-tweaks==1.5.0
 django-crispy-forms==2.1
 crispy-bootstrap4==2024.1
 
-# Utilidades de Usuario y Limpieza
+# Utilidades, Seguridad y Limpieza
 django-user-agents==0.4.0
 user-agents==2.2.0
 django-cleanup==8.1.0
+django-crum==0.7.9
+django-simple-history==3.7.0
 
 # PDF y extras
 weasyprint==61.2
