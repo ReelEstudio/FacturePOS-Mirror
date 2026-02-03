@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.pos.models import Product, Category, Client # Los nombres que uses
+from core.pos.models import Product, Category, Client, Company
 
 admin.site.register(Product)
 admin.site.register(Category)
