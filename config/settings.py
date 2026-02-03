@@ -99,8 +99,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0.2/ref/settings/#databases
 
+# Esto detecta automáticamente DATABASE_URL si existe, 
+# o usa los valores individuales si no.
 DATABASES = {
-    'default': {
+    'default': env.db() if env('DATABASE_URL', default=None) else {
         'ENGINE': env('DB_ENGINE'),
         'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
     }
