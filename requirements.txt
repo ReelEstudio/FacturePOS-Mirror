@@ -1,4 +1,4 @@
-# Core Django y Entorno
+# Base de Django y Servidor
 Django==4.0.2
 django-environ
 gunicorn
@@ -7,22 +7,23 @@ gunicorn
 psycopg2-binary
 dj-database-url
 
-# Extensiones de Django presentes en tu Settings
+# Librerías de Excel (Soluciona el error actual)
+openpyxl
+XlsxWriter
+
+# Extensiones del Proyecto
 django-widget-tweaks
 django-user-agents
 django-cleanup
 django-crum
 
-# Generación de Archivos y Reportes (Solución a los últimos errores)
-XlsxWriter
+# Reportes y códigos de barras
 weasyprint
 Pillow
 python-barcode
 
-# Seguridad y Criptografía
+# Seguridad y Utilidades
 cryptography
 pyOpenSSL
-
-# Utilidades de Red y Fechas
 requests
 python-dateutil
