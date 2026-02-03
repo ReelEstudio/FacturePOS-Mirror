@@ -10,17 +10,19 @@ django-environ==0.11.2
 python-dotenv==1.0.1
 requests==2.31.0
 
-# UI y Formularios
+# UI, Formularios y Seguridad
 django-widget-tweaks==1.5.0
 django-crispy-forms==2.1
 crispy-bootstrap4==2024.1
-
-# Utilidades, Seguridad y Limpieza
 django-user-agents==0.4.0
 user-agents==2.2.0
 django-cleanup==8.1.0
 django-crum==0.7.9
 django-simple-history==3.7.0
+
+# Códigos de Barras e Imágenes (El que faltaba)
+python-barcode==0.15.1
+Pillow==10.2.0
 
 # PDF y extras
 weasyprint==61.2
