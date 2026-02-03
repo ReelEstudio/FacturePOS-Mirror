@@ -1,15 +1,6 @@
 [phases.setup]
-nixPkgs = [
-    "python312",
-    "openjdk17",
-    "postgresql_16",
-    "gcc",
-    "pango",
-    "cairo",
-    "gdk-pixbuf",
-    "libxml2",
-    "gobject-introspection",
-    "glib",
-    "fontconfig",
-    "harfbuzz"
-]
+nixPkgs = ["python312", "pango", "cairo", "gdk-pixbuf", "libxml2", "gobject-introspection", "glib", "fontconfig", "harfbuzz", "postgresql_16", "openjdk17", "gcc"]
+
+[phases.build]
+# Esto ayuda a Python a encontrar las librerías de C durante la ejecución
+cmds = ["echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/nix/var/nix/profiles/default/lib' >> /app/.profile"]
