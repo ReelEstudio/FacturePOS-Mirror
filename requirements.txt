@@ -23,3 +23,6 @@ pyOpenSSL
 # --- Utilidades ---
 python-dateutil
 requests
+
+# (Mantén todo lo anterior y añade esto)
+XlsxWriter
