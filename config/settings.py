@@ -22,6 +22,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://factureposeltunel.up.railway.app']
 
 # 4. Definición de Aplicaciones
 DJANGO_APPS = [
