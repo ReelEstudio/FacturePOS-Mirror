@@ -1,28 +1,28 @@
-# --- Core Django ---
-Django>=4.0.2
+# Core Django y Entorno
+Django==4.0.2
 django-environ
+gunicorn
+
+# Base de Datos (PostgreSQL/Supabase)
+psycopg2-binary
+dj-database-url
+
+# Extensiones de Django presentes en tu Settings
 django-widget-tweaks
 django-user-agents
 django-cleanup
 django-crum
-gunicorn
 
-# --- Base de Datos ---
-psycopg2-binary
-dj-database-url
-
-# --- Reportes y Código de Barras ---
+# Generación de Archivos y Reportes (Solución a los últimos errores)
+XlsxWriter
 weasyprint
 Pillow
 python-barcode
 
-# --- Seguridad ---
+# Seguridad y Criptografía
 cryptography
 pyOpenSSL
 
-# --- Utilidades ---
-python-dateutil
+# Utilidades de Red y Fechas
 requests
-
-# (Mantén todo lo anterior y añade esto)
-XlsxWriter
+python-dateutil
