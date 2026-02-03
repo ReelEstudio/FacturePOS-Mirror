@@ -1,11 +1,11 @@
-# 1. Usamos la imagen base de Python 3.12 (Debian Trixie/Bookworm)
+# 1. Base de Python
 FROM python:3.12-slim
 
-# 2. Variables de entorno para optimizar Python en Docker
+# 2. Optimización
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# 3. Instalación de dependencias del sistema operativo
+# 3. Librerías de sistema (WeasyPrint + Timezone)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
@@ -18,16 +18,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tzdata \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 4. Establecer el directorio de trabajo dentro del contenedor
+# 4. Directorio de trabajo
 WORKDIR /app
 
-# 5. Instalar las dependencias de Python
+# 5. Dependencias de Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 6. Copiar todo el código de tu proyecto al contenedor
+# 6. Código del proyecto
 COPY . .
 
-# 7. Comando para arrancar la aplicación
-# IMPORTANTE: Hemos añadido 'python manage.py migrate' antes de arrancar Gunicorn
+# 7. Ejecutar migraciones y arrancar servidor
+# Esto asegura que las tablas se creen antes de que entres a la web
 CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind 0.0.0.0:${PORT:-8000} config.wsgi:application"]
