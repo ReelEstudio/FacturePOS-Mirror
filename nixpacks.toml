@@ -6,14 +6,11 @@ nixPkgs = [
     "glib",
     "fontconfig",
     "cairo",
-    "harfbuzz"
+    "harfbuzz",
+    "openjdk17",
+    "postgresql_16",
+    "gcc"
 ]
-
-[variables]
-PYTHONUNBUFFERED = "1"
-LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH"
-# Esta variable ayuda a WeasyPrint a encontrar las librerías en entornos Nix
-XDG_DATA_DIRS = "/usr/share:/usr/local/share:$XDG_DATA_DIRS"
 
 [phases.install]
 cmds = [
@@ -23,9 +20,18 @@ cmds = [
 ]
 
 [phases.build]
+# Forzamos el uso del python del entorno virtual para el comando de Django
 cmds = [
-    "python manage.py collectstatic --noinput"
+    ".venv/bin/python manage.py collectstatic --noinput"
 ]
 
+[variables]
+PYTHONUNBUFFERED = "1"
+# Estas rutas permiten que Python encuentre las librerías de sistema para los PDFs
+LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:/nix/store:$LD_LIBRARY_PATH"
+PYTHONPATH = "/app"
+# Agregamos el venv al PATH para que los comandos de terminal funcionen mejor
+PATH = "/app/.venv/bin:$PATH"
+
 [start]
-cmd = "gunicorn config.wsgi"
+cmd = ".venv/bin/gunicorn config.wsgi"
