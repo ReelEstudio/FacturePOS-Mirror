@@ -7,15 +7,16 @@ django-cleanup
 django-crum
 gunicorn
 
-# --- Base de Datos (PostgreSQL / Supabase) ---
+# --- Base de Datos ---
 psycopg2-binary
 dj-database-url
 
-# --- Reportes y Gráficos (WeasyPrint) ---
+# --- Reportes y Código de Barras ---
 weasyprint
 Pillow
+python-barcode
 
-# --- Seguridad (Solución al error ModuleNotFoundError) ---
+# --- Seguridad ---
 cryptography
 pyOpenSSL
 
