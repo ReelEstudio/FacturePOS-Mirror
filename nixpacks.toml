@@ -1,9 +1,0 @@
-[phases.setup]
-nixpkgsArchive = "bc8f8d1be58e8c8383e683a06e1e1e57893fff87"
-pkgs = ["python312", "pango", "cairo", "gdk-pixbuf", "libxml2", "gobject-introspection", "glib", "fontconfig", "harfbuzz", "postgresql_16"]
-
-[phases.install]
-cmds = ["python -m venv --copies /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt"]
-
-[start]
-cmd = "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/nix/var/nix/profiles/default/lib gunicorn config.wsgi"
