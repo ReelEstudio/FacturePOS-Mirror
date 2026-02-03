@@ -6,8 +6,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # 3. Instalación de dependencias del sistema operativo
-# Se incluye 'tzdata' para solucionar el error de US/Pacific
-# Se incluye 'libgdk-pixbuf-2.0-0' con el nombre correcto para esta versión de Debian
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
@@ -31,5 +29,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 7. Comando para arrancar la aplicación
-# Usamos ${PORT:-8000} para que Railway asigne el puerto automáticamente
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8000} config.wsgi:application"]
+# IMPORTANTE: Hemos añadido 'python manage.py migrate' antes de arrancar Gunicorn
+CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind 0.0.0.0:${PORT:-8000} config.wsgi:application"]
