@@ -17,6 +17,7 @@ weasyprint==61.2
 cffi==1.16.0
 
 # Entorno y Utilidades
+django-environ==0.11.2
 python-dotenv==1.0.1
 requests==2.31.0
 
