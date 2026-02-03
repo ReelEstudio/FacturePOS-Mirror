@@ -1,8 +1,31 @@
 [phases.setup]
-nixPkgs = ["python312", "pango", "libglvnd", "gobject-introspection", "ghostscript", "shared-mime-info"]
+nixPkgs = [
+    "python312",
+    "pango",
+    "gobject-introspection",
+    "glib",
+    "fontconfig",
+    "cairo",
+    "harfbuzz"
+]
+
+[variables]
+PYTHONUNBUFFERED = "1"
+LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH"
+# Esta variable ayuda a WeasyPrint a encontrar las librerías en entornos Nix
+XDG_DATA_DIRS = "/usr/share:/usr/local/share:$XDG_DATA_DIRS"
 
 [phases.install]
-cmds = ["python -m venv .venv", ".venv/bin/pip install -r requirements.txt"]
+cmds = [
+    "python -m venv .venv",
+    ".venv/bin/pip install --upgrade pip",
+    ".venv/bin/pip install -r requirements.txt"
+]
 
 [phases.build]
-cmds = ["python manage.py collectstatic --noinput"]
+cmds = [
+    "python manage.py collectstatic --noinput"
+]
+
+[start]
+cmd = "gunicorn config.wsgi"
