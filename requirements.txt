@@ -1,29 +1,26 @@
 #Requirements for Railway
-# Web Server
+# Servidor y Base de Datos
 gunicorn==21.2.0
-
-# Framework Base
-Django>=4.2,<5.0
-
-# Base de Datos
 psycopg2-binary==2.9.9
 dj-database-url==2.1.0
 
-# Archivos Estáticos
+# Django y Core
+Django>=4.2,<5.0
 whitenoise==6.6.0
-
-# Entorno y Utilidades
 django-environ==0.11.2
 python-dotenv==1.0.1
 requests==2.31.0
 
-# Extensiones de UI y Formularios (Los que dieron error)
+# UI y Formularios
 django-widget-tweaks==1.5.0
-django-user-agents==0.4.0
-user-agents==2.2.0
 django-crispy-forms==2.1
 crispy-bootstrap4==2024.1
 
-# Generación de PDFs
+# Utilidades de Usuario y Limpieza
+django-user-agents==0.4.0
+user-agents==2.2.0
+django-cleanup==8.1.0
+
+# PDF y extras
 weasyprint==61.2
 cffi==1.16.0
