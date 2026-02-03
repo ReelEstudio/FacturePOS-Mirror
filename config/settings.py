@@ -164,13 +164,12 @@ LOGIN_URL = '/login/'
 
 AUTH_USER_MODEL = 'user.User'
 
-# Email
-
-EMAIL_USE_TLS = int(env('EMAIL_USE_TLS')) == 1
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# Email configurado de forma segura (no rompe la app si falta una variable)
+EMAIL_USE_TLS = int(env('EMAIL_USE_TLS', default=1)) == 1
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = int(env('EMAIL_PORT', default=587))
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 # Sessions
 
