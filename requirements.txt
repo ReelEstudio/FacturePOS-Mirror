@@ -27,3 +27,5 @@ cryptography
 pyOpenSSL
 requests
 python-dateutil
+
+whitenoise==6.5.0
