@@ -20,18 +20,19 @@ cmds = [
 ]
 
 [phases.build]
-# Forzamos el uso del python del entorno virtual para el comando de Django
+# Usamos el python del entorno virtual para que encuentre Django y WeasyPrint
 cmds = [
     ".venv/bin/python manage.py collectstatic --noinput"
 ]
 
 [variables]
 PYTHONUNBUFFERED = "1"
-# Estas rutas permiten que Python encuentre las librerías de sistema para los PDFs
+# Estas rutas son vitales para que WeasyPrint cargue las librerías que estás descargando ahora
 LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:/nix/store:$LD_LIBRARY_PATH"
 PYTHONPATH = "/app"
-# Agregamos el venv al PATH para que los comandos de terminal funcionen mejor
+# Esto permite que al escribir "python" en la terminal de Railway, use el entorno virtual
 PATH = "/app/.venv/bin:$PATH"
 
 [start]
+# Comando de inicio usando gunicorn desde el entorno virtual
 cmd = ".venv/bin/gunicorn config.wsgi"
