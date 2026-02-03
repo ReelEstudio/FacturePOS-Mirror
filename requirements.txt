@@ -1,4 +1,4 @@
-# Django Base
+# --- Core Django ---
 Django>=4.0.2
 django-environ
 django-widget-tweaks
@@ -7,18 +7,18 @@ django-cleanup
 django-crum
 gunicorn
 
-# Base de Datos (PostgreSQL/Supabase)
+# --- Base de Datos (PostgreSQL / Supabase) ---
 psycopg2-binary
 dj-database-url
 
-# Generación de PDFs y Gráficos (WeasyPrint)
+# --- Reportes y Gráficos (WeasyPrint) ---
 weasyprint
 Pillow
 
-# Seguridad y Criptografía (Soluciona el error ModuleNotFoundError)
+# --- Seguridad (Solución al error ModuleNotFoundError) ---
 cryptography
 pyOpenSSL
 
-# Otras dependencias comunes en tu proyecto
+# --- Utilidades ---
 python-dateutil
 requests
