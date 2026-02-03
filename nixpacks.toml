@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["python312", "pango", "libglvnd", "gobject-introspection", "ghostscript", "shared-mime-info"]
+
+[phases.install]
+cmds = ["python -m venv .venv", ".venv/bin/pip install -r requirements.txt"]
+
+[phases.build]
+cmds = ["python manage.py collectstatic --noinput"]
