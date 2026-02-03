@@ -1,38 +1,15 @@
 [phases.setup]
 nixPkgs = [
     "python312",
+    "openjdk17",
+    "postgresql_16",
+    "gcc",
     "pango",
+    "cairo",
+    "gdk-pixbuf",
+    "libxml2",
     "gobject-introspection",
     "glib",
     "fontconfig",
-    "cairo",
-    "harfbuzz",
-    "openjdk17",
-    "postgresql_16",
-    "gcc"
+    "harfbuzz"
 ]
-
-[phases.install]
-cmds = [
-    "python -m venv .venv",
-    ".venv/bin/pip install --upgrade pip",
-    ".venv/bin/pip install -r requirements.txt"
-]
-
-[phases.build]
-# Usamos el python del entorno virtual para que encuentre Django y WeasyPrint
-cmds = [
-    ".venv/bin/python manage.py collectstatic --noinput"
-]
-
-[variables]
-PYTHONUNBUFFERED = "1"
-# Estas rutas son vitales para que WeasyPrint cargue las librerías que estás descargando ahora
-LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:/nix/store:$LD_LIBRARY_PATH"
-PYTHONPATH = "/app"
-# Esto permite que al escribir "python" en la terminal de Railway, use el entorno virtual
-PATH = "/app/.venv/bin:$PATH"
-
-[start]
-# Comando de inicio usando gunicorn desde el entorno virtual
-cmd = ".venv/bin/gunicorn config.wsgi"
