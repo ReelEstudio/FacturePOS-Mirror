@@ -1,12 +1,13 @@
-# Usamos Python 3.12 Slim (Debian Trixie/Bookworm)
+# 1. Usamos la imagen base de Python 3.12 (Debian Trixie/Bookworm)
 FROM python:3.12-slim
 
-# Evitamos que Python genere archivos .pyc y que el buffer se congele
+# 2. Variables de entorno para optimizar Python en Docker
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Instalamos las librerías de sistema necesarias para WeasyPrint
-# Nota: libgdk-pixbuf-2.0-0 lleva el guion extra que pedía el error anterior
+# 3. Instalación de dependencias del sistema operativo
+# Se incluye 'tzdata' para solucionar el error de US/Pacific
+# Se incluye 'libgdk-pixbuf-2.0-0' con el nombre correcto para esta versión de Debian
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
@@ -16,17 +17,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     shared-mime-info \
     fonts-liberation \
+    tzdata \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# 4. Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiamos e instalamos dependencias de Python
+# 5. Instalar las dependencias de Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos el resto del proyecto
+# 6. Copiar todo el código de tu proyecto al contenedor
 COPY . .
 
-# Railway inyecta la variable $PORT automáticamente. 
-# Usamos 0.0.0.0 para que sea accesible externamente.
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8080} config.wsgi:application"]
+# 7. Comando para arrancar la aplicación
+# Usamos ${PORT:-8000} para que Railway asigne el puerto automáticamente
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8000} config.wsgi:application"]
