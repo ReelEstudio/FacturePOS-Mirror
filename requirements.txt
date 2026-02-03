@@ -20,9 +20,9 @@ django-cleanup==8.1.0
 django-crum==0.7.9
 django-simple-history==3.7.0
 
-# Códigos de Barras e Imágenes (El que faltaba)
-python-barcode==0.15.1
-Pillow==10.2.0
+# Códigos de Barras e Imágenes (Versiones corregidas para Python 3.13)
+python-barcode
+Pillow>=10.3.0
 
 # PDF y extras
 weasyprint==61.2
