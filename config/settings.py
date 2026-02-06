@@ -132,7 +132,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 # 13. Sesiones (CORRECCIÓN CRÍTICA PARA DJANGO 4.0)
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer' 
 SESSION_COOKIE_NAME = 'factora'
 
 # 14. Seguridad HTTP
