@@ -28,5 +28,7 @@ pyOpenSSL
 requests
 python-dateutil
 
+# Módulos para ventas
 whitenoise==6.5.0
 lxml
+suds-py3
