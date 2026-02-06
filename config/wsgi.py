@@ -1,9 +1,16 @@
-""" WSGI config for web project. """ 
+"""
+WSGI config for web project.
 
-import os import django from django.core.wsgi import get_wsgi_application from django.conf import settings
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/4.0.2/howto/deployment/wsgi/
+"""
+
+import os
+
+from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-
-try: if not settings.configured: django.setup() settings.SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer' except Exception: pass
 
 application = get_wsgi_application()
