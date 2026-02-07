@@ -22,54 +22,46 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* FIX DEFINITIVO PARA EL FONDO AZUL */
-        /* Impedimos que la imagen de fondo se repita o tape el contenido del dashboard */
-        body.sidebar-mini.layout-fixed {
-            background-image: none !important; 
-            background-color: #f4f6f9 !important; /* Color gris claro estándar de AdminLTE */
+        /* 1. ELIMINAR EL FONDO AZUL GIGANTE */
+        /* Esto evita que la imagen del login se filtre al dashboard */
+        body:not(.login-page) {
+            background-image: none !important;
+            background-color: #f4f6f9 !important;
         }
 
-        /* Solo permitimos el fondo en la pantalla de Login si es necesario */
-        body.login-page {
-            background-size: cover !important;
+        /* 2. REPARAR EL MODO HORIZONTAL */
+        /* Si el menú está arriba, evitamos que se encime con el contenido */
+        .layout-top-nav .content-wrapper {
+            margin-left: 0 !important;
+            padding-top: 20px;
         }
 
-        /* AJUSTES PARA MÓVIL (PANTALLA PEQUEÑA) */
+        /* 3. RESPONSIVE HEADER (PARA MÓVIL) */
         @media (max-width: 991px) {
             .main-header {
                 margin-left: 0 !important;
-                display: flex !important;
                 width: 100% !important;
+                display: flex !important;
             }
-
-            /* Ocultamos los textos "Usuario:" y "Perfil:" para que no se corte el header */
+            /* Ocultamos etiquetas largas para que el menú no se amontone */
             .main-header .nav-link p, 
             .main-header .nav-link span:not(.badge),
             .navbar-nav label {
                 display: none !important;
             }
-
-            /* Forzamos a los elementos del header a estar en una sola línea */
             .navbar-nav {
                 flex-direction: row !important;
-                align-items: center;
             }
-
             .nav-item {
-                padding: 0 4px;
-            }
-
-            /* Aseguramos que el contenido empiece debajo del header y no detrás */
-            .content-wrapper {
-                margin-left: 0 !important;
-                padding-top: 5px !important;
+                padding: 0 5px;
             }
         }
 
-        /* AJUSTE PARA COMPUTADORA (PANTALLA GRANDE) */
+        /* 4. REPARAR MODO VERTICAL (SI REGRESAS A ÉL) */
         @media (min-width: 992px) {
-            .main-header, .content-wrapper {
-                margin-left: 250px !important; /* Espacio exacto para el sidebar */
+            body:not(.layout-top-nav) .main-header, 
+            body:not(.layout-top-nav) .content-wrapper {
+                margin-left: 250px !important;
             }
         }
     </style>
