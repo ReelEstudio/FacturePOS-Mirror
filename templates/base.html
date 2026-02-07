@@ -22,46 +22,54 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* 1. ELIMINAR EL FONDO AZUL GIGANTE */
-        /* Esto evita que la imagen del login se filtre al dashboard */
+        /* 1. SOLUCIÓN AL FONDO AZUL: Se elimina en todo el dashboard */
         body:not(.login-page) {
             background-image: none !important;
             background-color: #f4f6f9 !important;
         }
 
-        /* 2. REPARAR EL MODO HORIZONTAL */
-        /* Si el menú está arriba, evitamos que se encime con el contenido */
-        .layout-top-nav .content-wrapper {
-            margin-left: 0 !important;
-            padding-top: 20px;
+        /* 2. REGLAS PARA COMPUTADORA (PC) */
+        @media (min-width: 992px) {
+            /* Si el sistema está en Vertical, respetamos el margen del sidebar */
+            body:not(.layout-top-nav) .main-header, 
+            body:not(.layout-top-nav) .content-wrapper {
+                margin-left: 250px !important;
+            }
+            /* Si el sistema está en Horizontal, el margen es 0 */
+            body.layout-top-nav .content-wrapper {
+                margin-left: 0 !important;
+            }
         }
 
-        /* 3. RESPONSIVE HEADER (PARA MÓVIL) */
+        /* 3. REGLAS PARA CELULAR (MOVIL) */
         @media (max-width: 991px) {
+            /* FORZAMOS COMPORTAMIENTO VERTICAL EN CELULAR: 
+               Incluso si en PC está horizontal, en celular el header ocupará todo el ancho */
             .main-header {
                 margin-left: 0 !important;
                 width: 100% !important;
                 display: flex !important;
+                position: relative !important;
             }
-            /* Ocultamos etiquetas largas para que el menú no se amontone */
+
+            .content-wrapper {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+
+            /* Ocultamos los textos que causan que el header se corte */
             .main-header .nav-link p, 
             .main-header .nav-link span:not(.badge),
             .navbar-nav label {
                 display: none !important;
             }
+
             .navbar-nav {
                 flex-direction: row !important;
             }
+            
             .nav-item {
-                padding: 0 5px;
-            }
-        }
-
-        /* 4. REPARAR MODO VERTICAL (SI REGRESAS A ÉL) */
-        @media (min-width: 992px) {
-            body:not(.layout-top-nav) .main-header, 
-            body:not(.layout-top-nav) .content-wrapper {
-                margin-left: 250px !important;
+                padding: 0 4px;
             }
         }
     </style>
