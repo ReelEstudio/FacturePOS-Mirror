@@ -5,80 +5,19 @@
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="shortcut icon" href="{{ dashboard.get_image }}"/>
-    
     <link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'lib/fontawesome-6.1.1/css/all.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'lib/jquery-ui-1.12.1/jquery-ui.css' %}"/>
-    
     <script src="{% static 'lib/bootstrap-4.6.0/js/jquery.min.js' %}"></script>
     <script src="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
     <script src="{% static 'lib/bootstrap-4.6.0/js/popper.min.js' %}"></script>
     <script src="{% static 'lib/bootstrap-4.6.0/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'lib/adminlte-3.2.0/js/adminlte.min.js' %}"></script>
-    
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.2.0/css/adminlte.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-    
-    <style>
-        /* 1. ELIMINACIÓN TOTAL DEL FONDO AZUL EN EL DASHBOARD */
-        /* Aplicamos el parche a cualquier elemento que pueda estar cargando esa imagen */
-        body:not(.login-page), 
-        body:not(.login-page) .wrapper, 
-        body:not(.login-page) .main-header, 
-        body:not(.login-page) .content-wrapper {
-            background-image: none !important;
-            background-repeat: no-repeat !important;
-            background-size: initial !important;
-            background-color: #f4f6f9 !important; /* Gris claro de AdminLTE */
-        }
-
-        /* 2. REGLAS PARA COMPUTADORA (PC) - MODO HORIZONTAL Y VERTICAL */
-        @media (min-width: 992px) {
-            /* Si estás en modo HORIZONTAL (Top Nav) */
-            body.layout-top-nav .main-header {
-                background-color: #343a40 !important; /* Color oscuro profesional para el menú superior */
-            }
-            body.layout-top-nav .main-header .nav-link {
-                color: white !important;
-            }
-            
-            /* Si estás en modo VERTICAL (Sidebar) */
-            body:not(.layout-top-nav) .main-header, 
-            body:not(.layout-top-nav) .content-wrapper {
-                margin-left: 250px !important;
-            }
-        }
-
-        /* 3. REGLAS PARA CELULAR (MOVIL) */
-        @media (max-width: 991px) {
-            .main-header {
-                margin-left: 0 !important;
-                width: 100% !important;
-                display: flex !important;
-                background-color: #007bff !important; /* Azul sólido en móvil para visibilidad */
-            }
-            .main-header .nav-link {
-                color: white !important;
-            }
-            .main-header .nav-link p, 
-            .main-header .nav-link span:not(.badge),
-            .navbar-nav label {
-                display: none !important;
-            }
-            .navbar-nav {
-                flex-direction: row !important;
-            }
-            .nav-item {
-                padding: 0 4px;
-            }
-            .content-wrapper {
-                margin-left: 0 !important;
-            }
-        }
-    </style>
-
     <script src="{% static 'lib/bootstrap-daterangepicker-3.1/js/moment.min.js' %}"></script>
     <script src="{% static 'lib/bootstrap-daterangepicker-3.1/js/moment-with-locales.js' %}"></script>
     <script src="{% static 'lib/jquery-confirm-3.3.4/js/jquery-confirm.min.js' %}"></script>
@@ -87,15 +26,10 @@
     <link rel="stylesheet" href="{% static 'lib/sweetalert2-11.0.16/css/sweetalert2.min.css' %}"/>
     <script src="{% static 'lib/jquery-loading-overlay-2.1.7/js/loadingoverlay.min.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
-    
     {% block head %}{% endblock %}
 </head>
+{% block body %}
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        {% block body %}
-        {% endblock %}
-    </div>
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
+{% endblock %}
+<script src="{% static 'js/main.js' %}"></script>
 </html>
