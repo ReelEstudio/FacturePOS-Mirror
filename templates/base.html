@@ -22,54 +22,59 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* 1. SOLUCIÓN AL FONDO AZUL: Se elimina en todo el dashboard */
-        body:not(.login-page) {
+        /* 1. ELIMINACIÓN TOTAL DEL FONDO AZUL EN EL DASHBOARD */
+        /* Aplicamos el parche a cualquier elemento que pueda estar cargando esa imagen */
+        body:not(.login-page), 
+        body:not(.login-page) .wrapper, 
+        body:not(.login-page) .main-header, 
+        body:not(.login-page) .content-wrapper {
             background-image: none !important;
-            background-color: #f4f6f9 !important;
+            background-repeat: no-repeat !important;
+            background-size: initial !important;
+            background-color: #f4f6f9 !important; /* Gris claro de AdminLTE */
         }
 
-        /* 2. REGLAS PARA COMPUTADORA (PC) */
+        /* 2. REGLAS PARA COMPUTADORA (PC) - MODO HORIZONTAL Y VERTICAL */
         @media (min-width: 992px) {
-            /* Si el sistema está en Vertical, respetamos el margen del sidebar */
+            /* Si estás en modo HORIZONTAL (Top Nav) */
+            body.layout-top-nav .main-header {
+                background-color: #343a40 !important; /* Color oscuro profesional para el menú superior */
+            }
+            body.layout-top-nav .main-header .nav-link {
+                color: white !important;
+            }
+            
+            /* Si estás en modo VERTICAL (Sidebar) */
             body:not(.layout-top-nav) .main-header, 
             body:not(.layout-top-nav) .content-wrapper {
                 margin-left: 250px !important;
-            }
-            /* Si el sistema está en Horizontal, el margen es 0 */
-            body.layout-top-nav .content-wrapper {
-                margin-left: 0 !important;
             }
         }
 
         /* 3. REGLAS PARA CELULAR (MOVIL) */
         @media (max-width: 991px) {
-            /* FORZAMOS COMPORTAMIENTO VERTICAL EN CELULAR: 
-               Incluso si en PC está horizontal, en celular el header ocupará todo el ancho */
             .main-header {
                 margin-left: 0 !important;
                 width: 100% !important;
                 display: flex !important;
-                position: relative !important;
+                background-color: #007bff !important; /* Azul sólido en móvil para visibilidad */
             }
-
-            .content-wrapper {
-                margin-left: 0 !important;
-                width: 100% !important;
+            .main-header .nav-link {
+                color: white !important;
             }
-
-            /* Ocultamos los textos que causan que el header se corte */
             .main-header .nav-link p, 
             .main-header .nav-link span:not(.badge),
             .navbar-nav label {
                 display: none !important;
             }
-
             .navbar-nav {
                 flex-direction: row !important;
             }
-            
             .nav-item {
                 padding: 0 4px;
+            }
+            .content-wrapper {
+                margin-left: 0 !important;
             }
         }
     </style>
