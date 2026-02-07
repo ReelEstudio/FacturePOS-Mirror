@@ -22,54 +22,55 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* CSS PARA COMPUTADORA (Escritorio) */
-        @media (min-width: 992px) {
-            .main-header {
-                margin-left: 250px; /* Mantiene el espacio del sidebar */
-            }
-            .content-wrapper {
-                margin-left: 250px;
-            }
-            /* Imagen de fondo normal en PC */
-            .hold-transition.sidebar-mini.layout-fixed {
-                background-image: none !important; /* Evita que el logo azul tape el fondo blanco */
-            }
+        /* FIX DEFINITIVO PARA EL FONDO AZUL */
+        /* Impedimos que la imagen de fondo se repita o tape el contenido del dashboard */
+        body.sidebar-mini.layout-fixed {
+            background-image: none !important; 
+            background-color: #f4f6f9 !important; /* Color gris claro estándar de AdminLTE */
         }
 
-        /* CSS PARA MÓVIL (Celulares) */
+        /* Solo permitimos el fondo en la pantalla de Login si es necesario */
+        body.login-page {
+            background-size: cover !important;
+        }
+
+        /* AJUSTES PARA MÓVIL (PANTALLA PEQUEÑA) */
         @media (max-width: 991px) {
             .main-header {
                 margin-left: 0 !important;
-                width: 100% !important;
                 display: flex !important;
-                justify-content: space-between !important;
+                width: 100% !important;
             }
-            /* Ocultar textos que estorban en móvil */
+
+            /* Ocultamos los textos "Usuario:" y "Perfil:" para que no se corte el header */
             .main-header .nav-link p, 
             .main-header .nav-link span:not(.badge),
             .navbar-nav label {
                 display: none !important;
             }
-            /* Reducir márgenes para que todo quepa */
+
+            /* Forzamos a los elementos del header a estar en una sola línea */
             .navbar-nav {
                 flex-direction: row !important;
+                align-items: center;
             }
+
             .nav-item {
-                padding: 0 5px;
+                padding: 0 4px;
             }
-            /* Evitar que el fondo azul se amontone con el contenido */
+
+            /* Aseguramos que el contenido empiece debajo del header y no detrás */
             .content-wrapper {
                 margin-left: 0 !important;
-                background-color: white !important;
+                padding-top: 5px !important;
             }
         }
 
-        /* Ajuste de la imagen del Logo Azul (Background) */
-        /* Hacemos que la imagen sea decorativa y no empuje el contenido */
-        body {
-            background-position: top center !important;
-            background-size: contain !important;
-            background-repeat: no-repeat !important;
+        /* AJUSTE PARA COMPUTADORA (PANTALLA GRANDE) */
+        @media (min-width: 992px) {
+            .main-header, .content-wrapper {
+                margin-left: 250px !important; /* Espacio exacto para el sidebar */
+            }
         }
     </style>
 
