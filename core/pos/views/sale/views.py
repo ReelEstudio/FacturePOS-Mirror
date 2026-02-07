@@ -57,15 +57,6 @@ class SaleCreateView(PermissionMixin, CreateView):
     success_url = reverse_lazy('sale_admin_list')
     permission_required = 'add_sale'
 
-    # def get_form(self, form_class=None):
-    #     form = SaleForm()
-    #     client = Client.objects.filter(user__dni='9999999999999')
-    #     if client.exists():
-    #         client = client[0]
-    #         form.fields['client'].queryset = Client.objects.filter(id=client.id)
-    #         form.initial = {'client': client}
-    #     return form
-
     def post(self, request, *args, **kwargs):
         action = request.POST['action']
         data = {}
@@ -76,7 +67,10 @@ class SaleCreateView(PermissionMixin, CreateView):
                     sale = Sale()
                     sale.company = Company.objects.first()
                     sale.environment_type = sale.company.environment_type
-                    sale.receipts = Receipts.objects.get(code=VOUCHER_TYPE[0][0])
+                    
+# CORRECCIÓN 1: Captura el ID del comprobante seleccionado en el formulario
+                    sale.receipts_id = int(request.POST['receipts'])
+                    
                     sale.voucher_number = sale.generate_voucher_number()
                     sale.voucher_number_full = sale.get_voucher_number_full()
                     sale.employee_id = request.user.id
@@ -85,6 +79,7 @@ class SaleCreateView(PermissionMixin, CreateView):
                     sale.iva = iva
                     sale.dscto = float(request.POST['dscto']) / 100
                     sale.save()
+
                     for i in json.loads(request.POST['products']):
                         product = Product.objects.get(pk=i['id'])
                         detail = SaleDetail()
@@ -97,7 +92,9 @@ class SaleCreateView(PermissionMixin, CreateView):
                         sale.calculate_detail()
                         detail.product.stock -= detail.cant
                         detail.product.save()
+
                     sale.calculate_invoice()
+
                     if sale.payment_method == PAYMENT_METHOD[1][0]:
                         sale.end_credit = request.POST['end_credit']
                         sale.cash = 0.00
@@ -114,12 +111,21 @@ class SaleCreateView(PermissionMixin, CreateView):
                         sale.cash = float(request.POST['cash'])
                         sale.change = float(request.POST['change'])
                         sale.save()
-                    if sale.generate_electronic_invoice():
+
+                    # CORRECCIÓN 2: Lógica híbrida (Factura vs Nota de Venta)
+                    # Solo genera factura electrónica si el código del comprobante es '01'
+                    if sale.receipts.code == '01':
+                        if sale.generate_electronic_invoice():
+                            print_url = reverse_lazy('sale_admin_print_invoice', kwargs={'pk': sale.id})
+                            data = {'print_url': str(print_url)}
+                        else:
+                            transaction.set_rollback(True)
+                            data['error'] = 'No se ha podido generar el comprobante electrónico'
+                    else:
+                        # Si es Nota de Venta (u otro código), guarda e imprime directamente
                         print_url = reverse_lazy('sale_admin_print_invoice', kwargs={'pk': sale.id})
                         data = {'print_url': str(print_url)}
-                    else:
-                        transaction.set_rollback(True)
-                        data['error'] = 'No se ha podido generar el comprobante electrónico'
+
             elif action == 'search_products':
                 ids = json.loads(request.POST['ids'])
                 data = []
@@ -135,6 +141,7 @@ class SaleCreateView(PermissionMixin, CreateView):
                     item['dscto'] = '0.00'
                     item['total_dscto'] = '0.00'
                     data.append(item)
+
             elif action == 'search_client':
                 data = []
                 term = request.POST['term']
@@ -142,6 +149,7 @@ class SaleCreateView(PermissionMixin, CreateView):
                     item = i.toJSON()
                     item['text'] = i.get_full_name()
                     data.append(item)
+
             elif action == 'validate_client':
                 data = {'valid': True}
                 pattern = request.POST['pattern']
@@ -153,6 +161,7 @@ class SaleCreateView(PermissionMixin, CreateView):
                     data['valid'] = not queryset.filter(mobile=parameter).exists()
                 elif pattern == 'email':
                     data['valid'] = not queryset.filter(user__email=parameter).exists()
+
             elif action == 'create_client':
                 with transaction.atomic():
                     form1 = ClientUserForm(self.request.POST, self.request.FILES)
