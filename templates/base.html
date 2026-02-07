@@ -22,49 +22,54 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* FIX: Evita que el logo azul gigante tape el contenido en móvil */
-        .login-box, .register-box {
-            width: 90%;
-            margin: 20px auto;
-        }
-
-        /* Ajuste de imagen de fondo responsive */
-        body {
-            background-size: cover !important;
-            background-position: center !important;
-            height: auto !important;
-        }
-
-        /* Header Responsive real para AdminLTE */
-        @media (max-width: 768px) {
+        /* CSS PARA COMPUTADORA (Escritorio) */
+        @media (min-width: 992px) {
             .main-header {
-                display: flex !important;
-                width: 100% !important;
-                margin-left: 0 !important;
-                padding: 0 10px !important;
+                margin-left: 250px; /* Mantiene el espacio del sidebar */
             }
+            .content-wrapper {
+                margin-left: 250px;
+            }
+            /* Imagen de fondo normal en PC */
+            .hold-transition.sidebar-mini.layout-fixed {
+                background-image: none !important; /* Evita que el logo azul tape el fondo blanco */
+            }
+        }
 
-            /* Oculta los textos "Usuario:" y "Perfil:" para que quepan los nombres */
-            .main-header .nav-link span, 
-            .main-header .nav-link p {
+        /* CSS PARA MÓVIL (Celulares) */
+        @media (max-width: 991px) {
+            .main-header {
+                margin-left: 0 !important;
+                width: 100% !important;
+                display: flex !important;
+                justify-content: space-between !important;
+            }
+            /* Ocultar textos que estorban en móvil */
+            .main-header .nav-link p, 
+            .main-header .nav-link span:not(.badge),
+            .navbar-nav label {
                 display: none !important;
             }
-
-            /* Achica el nombre de usuario para que no empuje el menú */
+            /* Reducir márgenes para que todo quepa */
             .navbar-nav {
                 flex-direction: row !important;
-                font-size: 11px;
             }
-
             .nav-item {
-                padding: 0 2px;
+                padding: 0 5px;
             }
-
-            /* Ajuste del contenedor de la imagen de fondo que se ve en tu captura */
+            /* Evitar que el fondo azul se amontone con el contenido */
             .content-wrapper {
                 margin-left: 0 !important;
-                padding-top: 20px;
+                background-color: white !important;
             }
+        }
+
+        /* Ajuste de la imagen del Logo Azul (Background) */
+        /* Hacemos que la imagen sea decorativa y no empuje el contenido */
+        body {
+            background-position: top center !important;
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
         }
     </style>
 
@@ -85,7 +90,6 @@
         {% block body %}
         {% endblock %}
     </div>
-
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
