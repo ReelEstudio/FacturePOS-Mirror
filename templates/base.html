@@ -5,7 +5,6 @@
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="shortcut icon" href="{{ dashboard.get_image }}"/>
     
@@ -20,52 +19,51 @@
     <script src="{% static 'lib/adminlte-3.2.0/js/adminlte.min.js' %}"></script>
     
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.2.0/css/adminlte.css' %}"/>
-    
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     
     <style>
-        /* Ajuste General para el Header en AdminLTE */
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* FIX: Evita que el logo azul gigante tape el contenido en móvil */
+        .login-box, .register-box {
+            width: 90%;
+            margin: 20px auto;
         }
 
-        /* Ajustes específicos para dispositivos móviles */
+        /* Ajuste de imagen de fondo responsive */
+        body {
+            background-size: cover !important;
+            background-position: center !important;
+            height: auto !important;
+        }
+
+        /* Header Responsive real para AdminLTE */
         @media (max-width: 768px) {
-            /* Forzamos al header a usar el 100% del ancho real */
             .main-header {
-                margin-left: 0 !important;
+                display: flex !important;
                 width: 100% !important;
-                padding: 0 5px !important;
+                margin-left: 0 !important;
+                padding: 0 10px !important;
             }
 
-            /* Ocultamos textos largos (como "Usuario:", "Perfil:", etc.) */
-            /* Esto permite que solo se vea el Icono y el Nombre, evitando que se corte */
-            .nav-link p, 
-            .nav-link span:not(.badge), 
-            .navbar-nav label {
+            /* Oculta los textos "Usuario:" y "Perfil:" para que quepan los nombres */
+            .main-header .nav-link span, 
+            .main-header .nav-link p {
                 display: none !important;
             }
 
-            /* Reducimos el espacio entre iconos para que quepan todos en la fila */
-            .navbar-nav .nav-item .nav-link {
-                padding-left: 8px !important;
-                padding-right: 8px !important;
-            }
-
-            /* Ajuste del tamaño de fuente para el nombre de usuario */
+            /* Achica el nombre de usuario para que no empuje el menú */
             .navbar-nav {
-                font-size: 13px;
+                flex-direction: row !important;
+                font-size: 11px;
             }
 
-            /* Si el nombre de la empresa/restaurante es muy largo, lo limitamos */
-            .brand-text {
-                font-size: 14px;
-                max-width: 150px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+            .nav-item {
+                padding: 0 2px;
+            }
+
+            /* Ajuste del contenedor de la imagen de fondo que se ve en tu captura */
+            .content-wrapper {
+                margin-left: 0 !important;
+                padding-top: 20px;
             }
         }
     </style>
